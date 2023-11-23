@@ -1,0 +1,167 @@
+swagger: "2.0"
+info:
+  description: This is the swagger file that goes with our server code
+  version: "1.0.0"
+  title: Swagger Rest Article
+consumes:
+  - application/json
+produces:
+  - application/json
+
+basePath: /api
+
+# Paths supported by the server application
+paths:
+  /wishlist:
+    get:
+      operationId: wishlist.read_all
+      tags:
+        - Wishlist
+      summary: Read the entire set of wishlist, sorted by last name
+      description: Read the entire set of wishlist, sorted by last name
+      responses:
+        200:
+          description: Successfully read wishlist set operation
+          schema:
+            type: array
+            items:
+              properties:
+                wish_id:
+                  type: string
+                  description: Id of the wish
+                title:
+                  type: string
+                  description: First name of the wish
+                desc:
+                  type: string
+                  description: Last name of the wish
+                timestamp:
+                  type: string
+                  description: Creation/Update timestamp of the wish
+
+    post:
+      operationId: wishlist.create
+      tags:
+        - Wishlist
+      summary: Create a wish
+      description: Create a new wish
+      parameters:
+        - name: wish
+          in: body
+          description: Wish to create
+          required: True
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                description: First name of wish to create
+              desc:
+                type: string
+                description: Last name of wish to create
+      responses:
+        201:
+          description: Successfully created wish
+          schema:
+            properties:
+              wish_id:
+                type: string
+                description: Id of the wish
+              title:
+                type: string
+                description: First name of the wish
+              desc:
+                type: string
+                description: Last name of the wish
+              timestamp:
+                type: string
+                description: Creation/Update timestamp of the wish record
+
+  /wishlist/{wish_id}:
+    get:
+      operationId: wishlist.read_one
+      tags:
+        - Wishlist
+      summary: Read one wish
+      description: Read one wish
+      parameters:
+        - name: wish_id
+          in: path
+          description: Id of the wish to get
+          type: integer
+          required: True
+      responses:
+        200:
+          description: Successfully read wish from wishlist data operation
+          schema:
+            type: object
+            properties:
+              wish_id:
+                type: string
+                description: Id of the wish
+              title:
+                type: string
+                description: First name of the wish
+              desc:
+                type: string
+                description: Last name of the wish
+              timestamp:
+                type: string
+                description: Creation/Update timestamp of the wish record
+
+    put:
+      operationId: wishlist.update
+      tags:
+        - Wishlist
+      summary: Update a wish
+      description: Update a wish
+      parameters:
+        - name: wish_id
+          in: path
+          description: Id the wish to update
+          type: integer
+          required: True
+        - name: wish
+          in: body
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                description: First name of the wish
+              desc:
+                type: string
+                description: Last name of the wish
+      responses:
+        200:
+          description: Successfully updated wish
+          schema:
+            properties:
+              wish_id:
+                type: string
+                description: Id of the wish in the database
+              title:
+                type: string
+                description: First name of the wish
+              desc:
+                type: string
+                description: Last name of the wish
+              timestamp:
+                type: string
+                description: Creation/Update timestamp of the wish record
+
+    delete:
+      operationId: wishlist.delete
+      tags:
+        - Wishlist
+      summary: Delete a wish from the wishlist list
+      description: Delete a wish
+      parameters:
+        - name: wish_id
+          in: path
+          type: integer
+          description: Id of the wish to delete
+          required: true
+      responses:
+        200:
+          description: Successfully deleted a wish
