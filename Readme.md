@@ -1,4 +1,4 @@
-Wishlist Backend Web App Readme
+
 This is a simple backend web application for managing a wishlist. The application provides basic CRUD (Create, Read, Update, Delete) functionality for wishlist items.
 
 Technologies Used
